@@ -1,6 +1,10 @@
 ##############################################################################
 ## Read in MA star rating data 
 ##############################################################################
+
+install.packages("plyr")
+library(plyr)
+
 source("data-code/rating_variables.R")
 
 ## Assign yearly datasets and clean star rating information
