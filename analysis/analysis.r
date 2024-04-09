@@ -45,5 +45,7 @@ ggsave("avg_payment")
 
 ## Estimate ATEs ##
 # 5. Running variable
+summary(lm(avg_enrollment~factor(Star_Rating), data=final.data))
+
 
 

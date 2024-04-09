@@ -7,6 +7,10 @@ library(plyr)
 
 source("data-code/rating_variables.R")
 
+library(vroom)
+column_spec <- spec(final.data)
+column_spec
+
 ## Assign yearly datasets and clean star rating information
 
 ## 2008
@@ -27,7 +31,6 @@ star.data.2008b <- as_tibble(star.data.2008b) %>%
 star.data.2008 <- (star.data.2008a %>% select(-new_contract)) %>%
   left_join(star.data.2008b, by=c("contractid")) %>%
   mutate(year=2008)
-
 
 ## 2009
 ma.path.2009a <- paste0("data/input/ma-star-ratings/2009/2009_Part_C_Report_Card_Master_Table_2009_11_30_stars.csv")
