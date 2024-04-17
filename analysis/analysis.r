@@ -65,6 +65,30 @@ print(star_counts)
 
 # 6. Estimate of 3-star, 2.5-star, and 3.5-star ratings on enrollment
 summary(lm(avg_enrollment~factor(Star_Rating), data=final.data))
+install.packages("rdrobust")
+library(rdrobust)
+
+ma.rd = final.data %>%
+  filter(Star_Rating == 2 | Star_Rating == 2.5) %>%
+  mutate(score = Star_Rating - 0.125,
+         treat = (score >= 0),
+         window1 = (score >= -0.1875 & score <= 0.1875),
+         window2 = (score >= -0.125 & score <= 0.125),
+         mkt_share = avg_enrollment / avg_eligibles,
+         ln_share = log(mkt_share),
+         score_treat = score * treat)
+
+estimate = rdrobust(y=ma.rd$avg_enrolled, x=ma.rd$Star_Rating, c=0,
+                 h=0.125, p=1, kernel="uniform", vce="hc0",
+                 masspoints="off")
+summary(estimate)
 
 
+# 7. 
+
+# 8. 
+
+# 9. 
+
+# 10. 
 
